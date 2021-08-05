@@ -69,13 +69,13 @@ public class Heroes {
                         .append(this.universo)
                         .toString();
     }
-    
+
     public static Heroes fromCsvLine (String linha){
         String[] campos = linha.split(",");
         return new Heroes((campos[1]),
                     Integer.parseInt(campos[0]), 
-                    Integer.parseInt(campos[3]), 
-                    Universe.valueOf(campos[4]));
+                    Integer.parseInt(campos[2]), 
+                    Universe.valueOf(campos[3]));
     }
     
 }

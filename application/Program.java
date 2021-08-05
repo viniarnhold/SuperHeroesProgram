@@ -1,6 +1,10 @@
 package application;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +20,25 @@ public class Program {
         System.out.println("Seja bem vindo ao Super Heroes Program!");
         System.out.println();
 
-            List<Heroes> list = new ArrayList<>();
+        List<Heroes> herois = new ArrayList<>();
+        List<String> linhasLidas = new ArrayList<>();
+        File dados = new File("dados.csv");
+        if(dados.exists() && !dados.isDirectory()){
 
-            int n = 0;
-            int codigo = 1;
+            try {
+                linhasLidas = Files.readAllLines(Paths.get("dados.csv"));
+                for(String linha : linhasLidas){
+
+                    herois.add(Heroes.fromCsvLine(linha));
+                }
+            } 
+            catch (IOException e) {
+                System.out.println("Erro ao carregar banco de dados");
+		    }
+        }
+        int n = 0;
+         int codigo = herois.size() + 1;
+
         while (n != 3){
 
             System.out.println("Escolha a opção desejada:");
@@ -29,21 +48,34 @@ public class Program {
             n = sc.nextInt();
             sc.nextLine();
 
-            if (n == 1){
+            if (n == 1) {
                 System.out.print("Nome do herói: ");
                 String nome = sc.nextLine();
                 System.out.print("Coeficiente de força do herói(1-1000): ");
                 int forca = sc.nextInt();
                 System.out.print("Universo do Herói: ");
                 Universe universo = Universe.valueOf(sc.next());
-                list.add(new Heroes(nome, codigo, forca, universo));
+                herois.add(new Heroes(nome, codigo, forca, universo));
                 codigo++;
             }
 
-            if (n==2){
-                for (Heroes c : list){
+            if (n==2) {
+                for (Heroes c : herois){
                     System.out.println(c.toString());
                 }
+            }
+
+            if (n==3) {
+                List<String> linhas = new ArrayList<>();
+		        for(Heroes c : herois) {
+			    linhas.add(c.toCsvLine());
+		    }	
+		        try {
+                    Files.write(Paths.get("dados.csv"), linhas, StandardCharsets.ISO_8859_1, StandardOpenOption.CREATE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
             System.out.println();
 

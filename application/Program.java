@@ -21,11 +21,11 @@ public class Program {
         System.out.println();
 
         List<Heroes> herois = new ArrayList<>();
-        File dados = new File("nomeArquivo");
+        File dados = new File(NOME_ARQUIVO);
         if(dados.exists() && !dados.isDirectory()){
 
             try {
-                List<String> linhasLidas = Files.readAllLines(Paths.get(nomeArquivo));
+                List<String> linhasLidas = Files.readAllLines(Paths.get(NOME_ARQUIVO));
                 for(String linha : linhasLidas){
 
                     herois.add(Heroes.fromCsvLine(linha));
@@ -72,7 +72,7 @@ public class Program {
 			    linhas.add(c.toCsvLine());
 		    }	
 		        try {
-                    Files.write(Paths.get(nomeArquivo), linhas, StandardCharsets.ISO_8859_1, StandardOpenOption.CREATE);
+                    Files.write(Paths.get(NOME_ARQUIVO), linhas, StandardCharsets.ISO_8859_1, StandardOpenOption.CREATE);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -84,5 +84,5 @@ public class Program {
 
         sc.close();
     }
-    private static final String nomeArquivo = "dados.csv";
+    private static final String NOME_ARQUIVO = "dados.csv";
 }

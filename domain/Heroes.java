@@ -60,4 +60,22 @@ public class Heroes {
              + " - do "
              + universo;
     }
+
+    public String toCsvLine(){
+        return new StringBuilder()
+                        .append(this.codigo).append(",")
+                        .append(this.nome).append(",")
+                        .append(this.forca).append(",")
+                        .append(this.universo)
+                        .toString();
+    }
+    
+    public static Heroes fromCsvLine (String linha){
+        String[] campos = linha.split(",");
+        return new Heroes((campos[1]),
+                    Integer.parseInt(campos[0]), 
+                    Integer.parseInt(campos[3]), 
+                    Universe.valueOf(campos[4]));
+    }
+    
 }

@@ -21,12 +21,11 @@ public class Program {
         System.out.println();
 
         List<Heroes> herois = new ArrayList<>();
-        List<String> linhasLidas = new ArrayList<>();
-        File dados = new File("dados.csv");
+        File dados = new File("nomeArquivo");
         if(dados.exists() && !dados.isDirectory()){
 
             try {
-                linhasLidas = Files.readAllLines(Paths.get("dados.csv"));
+                List<String> linhasLidas = Files.readAllLines(Paths.get(nomeArquivo));
                 for(String linha : linhasLidas){
 
                     herois.add(Heroes.fromCsvLine(linha));
@@ -34,10 +33,12 @@ public class Program {
             } 
             catch (IOException e) {
                 System.out.println("Erro ao carregar banco de dados");
+                
+                System.exit(-1);
 		    }
         }
         int n = 0;
-         int codigo = herois.size() + 1;
+        int codigo = herois.size() + 1;
 
         while (n != 3){
 
@@ -71,7 +72,7 @@ public class Program {
 			    linhas.add(c.toCsvLine());
 		    }	
 		        try {
-                    Files.write(Paths.get("dados.csv"), linhas, StandardCharsets.ISO_8859_1, StandardOpenOption.CREATE);
+                    Files.write(Paths.get(nomeArquivo), linhas, StandardCharsets.ISO_8859_1, StandardOpenOption.CREATE);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -83,4 +84,5 @@ public class Program {
 
         sc.close();
     }
+    private static final String nomeArquivo = "dados.csv";
 }

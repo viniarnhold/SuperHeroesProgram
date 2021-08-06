@@ -53,16 +53,7 @@ public class Program {
             }
 
             if (n==3) {
-                List<String> linhas = new ArrayList<>();
-		        for(Heroes c : herois) {
-			    linhas.add(c.toCsvLine());
-		    }	
-		        try {
-                    Files.write(Paths.get(NOME_ARQUIVO), linhas, StandardCharsets.ISO_8859_1, StandardOpenOption.CREATE);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                repository.saveAll(herois);
             }
             System.out.println();
 

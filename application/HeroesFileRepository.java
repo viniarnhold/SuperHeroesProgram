@@ -2,8 +2,10 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +38,18 @@ public class HeroesFileRepository implements HeroesRepository {
     }
 
     @Override
-    public void saveAll(Heroes herois) {
-        // TODO Auto-generated method stub
+    public void saveAll(List<Heroes> herois) {
+        
+        List<String> linhas = new ArrayList<>();
+        for(Heroes c : herois) {
+        linhas.add(c.toCsvLine());
+    }	
+        try {
+            Files.write(Paths.get(NOME_ARQUIVO), linhas, StandardCharsets.ISO_8859_1, StandardOpenOption.CREATE);
+        } catch (IOException e) {
+            System.out.print("Houve um erro ao salvar os herois");;
+        }
         
     }
-
     public static String NOME_ARQUIVO = "dados.csv";  
 }

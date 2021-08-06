@@ -20,23 +20,9 @@ public class Program {
         System.out.println("Seja bem vindo ao Super Heroes Program!");
         System.out.println();
 
-        List<Heroes> herois = new ArrayList<>();
-        File dados = new File(NOME_ARQUIVO);
-        if(dados.exists() && !dados.isDirectory()){
+        HeroesFileRepository repository = new HeroesFileRepository();
+        List<Heroes> herois = repository.findAll();
 
-            try {
-                List<String> linhasLidas = Files.readAllLines(Paths.get(NOME_ARQUIVO));
-                for(String linha : linhasLidas){
-
-                    herois.add(Heroes.fromCsvLine(linha));
-                }
-            } 
-            catch (IOException e) {
-                System.out.println("Erro ao carregar banco de dados");
-                
-                System.exit(-1);
-		    }
-        }
         int n = 0;
         int codigo = herois.size() + 1;
 
@@ -84,5 +70,7 @@ public class Program {
 
         sc.close();
     }
-    private static final String NOME_ARQUIVO = "dados.csv";
+
+public static final String NOME_ARQUIVO = "dados.csv";
+ 
 }

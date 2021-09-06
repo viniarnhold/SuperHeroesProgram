@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import domain.Combate;
 import domain.Heroes;
 import domain.enums.Universe;
 
@@ -26,12 +27,13 @@ public class Program {
         int n = 0;
         int codigo = herois.size() + 1;
 
-        while (n != 3){
+        while (n != 4){
 
             System.out.println("Escolha a opção desejada:");
             System.out.println("1 - Cadastro de herói");
             System.out.println("2 - Listar heróis");
-            System.out.println("3 - Sair do programa");
+            System.out.println("3 - Combate");
+            System.out.println("4 - Sair do programa");
             n = sc.nextInt();
             sc.nextLine();
 
@@ -40,10 +42,11 @@ public class Program {
                 String nome = sc.nextLine();
                 System.out.print("Coeficiente de força do herói(1-1000): ");
                 int forca = sc.nextInt();
-                System.out.print("Universo do Herói: ");
+                System.out.print("Universo do Herói(DC/MARVEL): ");
                 Universe universo = Universe.valueOf(sc.next());
                 herois.add(new Heroes(nome, codigo, forca, universo));
                 codigo++;
+                System.out.println("Herói cadastrado com sucesso!");
             }
 
             if (n==2) {
@@ -52,7 +55,34 @@ public class Program {
                 }
             }
 
-            if (n==3) {
+            if (n==3){
+                Heroes player1 = null;
+                Heroes player2 = null;
+                System.out.println("Escolha o primeiro herói do combate(código):");
+                int p1 = sc.nextInt();
+                for(Heroes c : herois){
+                    if (p1 == c.getCodigo()){
+                        player1 = new Heroes(c.getNome(), c.getCodigo(), c.getForca(), c.getUniverso());
+                        break;
+                    }
+                }
+                System.out.println("Escolha o segundo heroi do combate(código):");
+                int p2 = sc.nextInt();
+                for(Heroes c : herois){
+                    if (p2 == c.getCodigo()){
+                        player2 = new Heroes(c.getNome(), c.getCodigo(), c.getForca(), c.getUniverso());
+                        break;
+                    }
+                }
+                if(player1.getCodigo() != player2.getCodigo()) {
+                    Combate combate = new Combate(player1, player2);
+                } else {
+                    System.out.println("Você não pode selecionar herois iguais");
+                }
+
+
+            }
+            if (n==4) {
                 repository.saveAll(herois);
             }
             System.out.println();

@@ -28,23 +28,24 @@ public class Program {
         int codigo = herois.size() + 1;
 
         while (n != 4){
-
-            System.out.println("Escolha a opção desejada:");
-            System.out.println("1 - Cadastro de herói");
-            System.out.println("2 - Listar heróis");
-            System.out.println("3 - Combate");
-            System.out.println("4 - Sair do programa");
+            ExibicaoMenu.exibir();
             n = sc.nextInt();
             sc.nextLine();
 
             if (n == 1) {
                 System.out.print("Nome do herói: ");
                 String nome = sc.nextLine();
-                System.out.print("Coeficiente de força do herói(1-1000): ");
-                int forca = sc.nextInt();
                 System.out.print("Universo do Herói(DC/MARVEL): ");
                 Universe universo = Universe.valueOf(sc.next());
-                herois.add(new Heroes(nome, codigo, forca, universo));
+                System.out.print("Vida do herói: ");
+                Integer vida = sc.nextInt();
+                System.out.print("Força do heroi: ");
+                Integer forca = sc.nextInt();
+                System.out.print("Agilidade do heroi: ");
+                Integer agilidade = sc.nextInt();
+                System.out.print("Inteligencia do heroi: ");
+                Integer inteligencia = sc.nextInt();
+                herois.add(new Heroes(codigo, nome, universo, vida, forca, agilidade, inteligencia));
                 codigo++;
                 System.out.println("Herói cadastrado com sucesso!");
             }
@@ -62,7 +63,7 @@ public class Program {
                 int p1 = sc.nextInt();
                 for(Heroes c : herois){
                     if (p1 == c.getCodigo()){
-                        player1 = new Heroes(c.getNome(), c.getCodigo(), c.getForca(), c.getUniverso());
+                        player1 = c;
                         break;
                     }
                 }
@@ -70,7 +71,7 @@ public class Program {
                 int p2 = sc.nextInt();
                 for(Heroes c : herois){
                     if (p2 == c.getCodigo()){
-                        player2 = new Heroes(c.getNome(), c.getCodigo(), c.getForca(), c.getUniverso());
+                        player2 = c;
                         break;
                     }
                 }

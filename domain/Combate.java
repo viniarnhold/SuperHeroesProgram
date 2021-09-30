@@ -13,7 +13,7 @@ public class Combate {
         System.out.println("Selecione o atributo(V/F/A/I)");
         char atributo = sc.nextLine().charAt(0);
 
-        if(atributo == 'V'){    //COMBATE COM O ATRIBUTO VIDA
+        if(atributo == 'V'){                  //COMBATE COM O ATRIBUTO VIDA
             if(this.player1.getVida() > this.player2.getVida()){
                 System.out.println(this.player1.getNome() + " ganhou o combate!");
             } else if(this.player1.getVida() < this.player2.getVida()){
@@ -22,7 +22,7 @@ public class Combate {
                 System.out.println("Houve um empate no combate");
             }
 
-        } else if (atributo == 'F') {       //COMBATE COM O ATRIBUTO FORÇA
+        } else if (atributo == 'F') {        //COMBATE COM O ATRIBUTO FORÇA
             if (this.player1.getForca() > this.player2.getForca()) {
                 System.out.println(this.player1.getNome() + " ganhou o combate!");
             } else if (this.player1.getForca() < this.player2.getForca()) {
@@ -30,7 +30,7 @@ public class Combate {
             } else {
                 System.out.println("Houve um empate no combate");
             }
-        } else if (atributo == 'A'){        //COMBATE COM O ATRIBUTO AGILIDADE
+        } else if (atributo == 'A'){         //COMBATE COM O ATRIBUTO AGILIDADE
             if (this.player1.getAgilidade() > this.player2.getAgilidade()) {
                 System.out.println(this.player1.getNome() + " ganhou o combate!");
             } else if (this.player1.getAgilidade() < this.player2.getAgilidade()) {
@@ -38,7 +38,7 @@ public class Combate {
             } else {
                 System.out.println("Houve um empate no combate");
             }
-        } else if (atributo == 'I'){        ////COMBATE COM O ATRIBUTO INTELIGÊNCIA
+        } else if (atributo == 'I'){         //COMBATE COM O ATRIBUTO INTELIGÊNCIA
             if (this.player1.getInteligencia() > this.player2.getInteligencia()) {
                 System.out.println(this.player1.getNome() + " ganhou o combate!");
             } else if (this.player1.getInteligencia() < this.player2.getInteligencia()) {

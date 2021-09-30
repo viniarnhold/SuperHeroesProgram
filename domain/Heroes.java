@@ -100,7 +100,7 @@ public class Heroes {
         return new StringBuilder()
                         .append(this.codigo).append(",")
                         .append(this.nome).append(",")
-                        .append(this.universo)
+                        .append(this.universo).append(",")
                         .append(this.vida).append(",")
                         .append(this.forca).append(",")
                         .append(this.inteligencia).append(",")

@@ -29,6 +29,7 @@ hs_err_pid*
 *.iws
 *.iml
 *.ipr
+out/
 
 target/
 

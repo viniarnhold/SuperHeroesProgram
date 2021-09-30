@@ -24,3 +24,11 @@ hs_err_pid*
 
 *.csv
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+target/
+
